@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap');
 
 * {
   margin: 0px;
@@ -7,46 +6,52 @@
 
 body {
   background-color: #f7f7f7;
+  font-family: 'Lato';
 }
 
 nav {
   background-color: #ffffff;
   border-bottom: 1px dotted black;
+  top: 0px;
+  position: -webkit-sticky;
   position: sticky;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
 }
 
-ul {  
+.menu {  
   text-align: center;
   padding: 0px;
 }
 
-li {
+.menu-items {
   display: inline-block;
 }
 
-.menu {
+.link {
   display: block;
   text-decoration: none;
   color: black;
   padding: 20px 5px;
-  width: 100px;
+  width: 125px;
 }
 
-.menu:hover {
-  color: #1F1717;
+.link:hover {
   color: #FFF;
-  -- text-decoration: underline;
-  
-  background-color: #7B66FF;
+  padding: 5px 5px;
+  background-image: linear-gradient(#7B66FF, #b6adf0);
+  border-radius: 25px;
+  --border: 1px solid #888888;
+  box-shadow: 3px 3px #888888;
+}
 
-  /*
-  border-top: 1px dotted black;
-  border-right: 1px dotted black;
-  border-left: 1px dotted black;
-  border-radius: 35px 35px 0px 0px;
-  */
+.theme-switcher-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 25px;
+  box-shadow: 2px 3px;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 50%
 }
 
 .article-container {
@@ -63,12 +68,12 @@ li {
     padding: 0px 12px;
 }
 
-a.title {
+.title {
     text-decoration: none;
     color: #000;
 }
 
-a.title:hover {
+.title:hover {
     color: #7B66FF;
 }
 
@@ -88,4 +93,60 @@ small {
 .dark-background {
   background-color: #31304D;
   color: #FFF;
+}
+
+.intro {
+  display: inline-block;
+  height: 25%;
+  width: 100%;
+  background-color: #FFF;
+  padding: 10% 0px; 
+}
+
+.intro h1 {
+  /* display: block; */
+  text-align: center;
+  font-size: 4em;
+}
+
+.ability {
+  display: inline-block;
+  height: 25%;
+  width: 100%;
+  background-color: #FFF;
+  padding: 10% 0px; 
+}
+
+.ability h1 {
+  /* display: block; */
+  text-align: center;
+  font-size: 4em;
+}
+
+.portfolio {
+  display: inline-block;
+  height: 25%;
+  width: 100%;
+  background-color: #FFF;
+  padding: 10% 0px; 
+}
+
+.portfolio h1 {
+  /* display: block; */
+  text-align: center;
+  font-size: 4em;
+}
+
+.writing {
+  display: inline-block;
+  height: 25%;
+  width: 100%;
+  background-color: #FFF;
+  padding: 10% 0px; 
+}
+
+.writing h1 {
+  /* display: block; */
+  text-align: center;
+  font-size: 4em;
 }

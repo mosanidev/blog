@@ -9,119 +9,67 @@
 <body>
   
   <nav class="menu-container">
-    <ul>
-      <li><a class="menu" href="#">Blog</a></li>
-      <li><a class="menu" href="#" onclick="tes()">About Me</a></li>
-      <li><a class="menu" href="#" onclick="switchTheme(this)">Dark Mode</a></li>
+    <ul class="menu">
+      <li class="menu-items"><a class="link" href="#" onclick="jumpTo('intro')"><strong>Introduction</strong></a></li>
+      <li class="menu-items"><a class="link" href="#" onclick="jumpTo('ability')"><strong>My Expertise</strong></a></li>
+      <li class="menu-items"><a class="link" href="#" onclick="jumpTo('portfolio')"><strong>My Portfolio</strong></a></li>
+      <li class="menu-items"><a class="link" href="#" onclick="jumpTo('contact')"><strong>Contact Me</strong></a></li>
+      <!-- <li><a class="menu" href="#" onclick="jumpTo('writing')">My Writing</a></li> -->
+      <li class="menu-items"><a class="link" href="#" onclick="switchTheme(this)">Dark Mode</a></li>
     </ul>
+
+    <div class="hamburger" id="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
   </nav>
 
-  <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
-            <div class="article-container">
-              <img src="https://picsum.photos/200" width="100">
-              <div class="paragraph-container"> 
-                <h3><a class="title" href="#judul">Penggunaan Join pada SQL Database</a></h3><br>
-                <p>Asyik hari ini panas banget, pasti sesuatu deh entar</p><br>
-                <small>28 Nov 23</small> | <small>9 min read</small>
-              </div> 
-            </div>
+  <section id="intro" class="intro">
+    <h1>Hi! I'm Sani. <br> How can i help you ? 😊</h1>
+  </section>
 
-            <section id="section-ini">
-              <p>MENGETES SAJA</p>
-            </div>
+  <section id="ability" class="ability">
+    <h1>My Expertise</h1>
+    <br>
+    <ul>
+      <li>HTML + CSS</li>
+      <li>PHP</li>
+      <li>C#</li>
+      <li>SQL</li>
+    </ul>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h1>Portfolio</h1>
+    <br>
+    <ul>
+      <li>#1</li>
+      <li>#2</li>
+      <li>#3</li>
+    </ul>
+  </section>
+
+  <section id="writing" class="writing">
+    <h1>Writing</h1>
+    <br>
+    <ul> 
+      <li>#1</li>
+      <li>#2</li>
+      <li>#3</li>
+    </ul>
+  </section>
+
+  <div class="theme-switcher-container">
+    <img src="src/img/sun.png" width="35"/>
+  </div>
 <script>
-  function tes()
+  function jumpTo(targetSection)
   {
-    var iniSection = document.getElementById("section-ini")
+    const section = document.getElementById(targetSection)
 
-    iniSection.scrollIntoView({behavior: 'smooth'})
+    section.scrollIntoView({behavior: 'smooth'})
   }
 
   function switchTheme(event)
