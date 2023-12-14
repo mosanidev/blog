@@ -4,16 +4,23 @@
   margin: 0px;
 }
 
+:root {
+  --normal-font: 400;
+  --bold-font: 600;
+  --main-bg-color: #fdfdfd;
+  --secondary-bg-color: #f2f2f2;
+}
+
 body {
-  background-color: #f7f7f7;
+  background-color: var(--main-bg-color);
   font-family: 'Lato';
 }
 
 nav {
-  background-color: #ffffff;
+  background-color: var(--secondary-bg-color);
   border-bottom: 1px dotted black;
   top: 0px;
-  position: -webkit-sticky;
+  position: -webkit-sticky; /*untuk safari browser*/
   position: sticky;
 }
 
@@ -32,6 +39,8 @@ nav {
   color: black;
   padding: 20px 5px;
   width: 125px;
+  font-size: 1rem;
+  font-weight: var(--bold-font);
 }
 
 .link:hover {
@@ -39,26 +48,29 @@ nav {
   padding: 5px 5px;
   background-image: linear-gradient(#7B66FF, #b6adf0);
   border-radius: 25px;
-  --border: 1px solid #888888;
+  cursor: pointer;
   box-shadow: 3px 3px #888888;
 }
 
-.theme-switcher-container {
+.theme-switcher {
   position: fixed;
   bottom: 0;
   right: 0;
   margin: 25px;
   box-shadow: 2px 3px;
   border: 1px solid black;
-  padding: 20px;
+  padding: 11px;
   border-radius: 50%
+}
+
+.theme-switcher:hover {
+  cursor: pointer;
 }
 
 .article-container {
     width: 560px;
     margin: 15px auto;
     padding: 15px;
-    background-color: #FFF;
     border-radius:2px;
     overflow: hidden;
 }
@@ -86,20 +98,58 @@ small {
   color:#45474B;
 }
 
-.darker-background {
-  background-color: #161A30;
+body.dark-background {
+  background-color: #1d223e;
 }
 
-.dark-background {
-  background-color: #31304D;
-  color: #FFF;
+
+
+/* body.dark-background .ability, body.dark-background .contact-me {
+  background-color: #202646;
+} */
+
+body.dark-background h1 {
+  color: #FBF6EE;
+}
+
+body.dark-background .theme-switcher {
+  background-color: #B6BBC4;
+}
+
+body.dark-background nav {
+  background-color: #31304d;
+  --color: #FFF;
+}
+
+body.dark-background a {
+  color: #F3F8FF;
+}
+
+body.dark-background .intro {
+  color: #F3F8FF;
+}
+
+body.dark-background footer {
+  
+  background-color: #141729;
+  color: #F3F8FF;
+}
+
+body.dark-background .portfolio p {
+  color: #F3F8FF;
+}
+
+footer {
+  
+  background-color: #31304d;background-color: var(--secondary-bg-color);
+  padding: 1rem;
+  text-align: center;
 }
 
 .intro {
   display: inline-block;
   height: 25%;
   width: 100%;
-  background-color: #FFF;
   padding: 10% 0px; 
 }
 
@@ -109,25 +159,59 @@ small {
   font-size: 4em;
 }
 
+
+.profile p{
+  text-align: justify;
+  font-size: large;
+}
+
+.profile img{
+  width: 35%;
+  object-fit: cover;
+}
+
+.profile {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  align-items: center;
+  padding: 5rem 7rem;
+}
+
 .ability {
+  padding: 10rem 0;
   display: inline-block;
   height: 25%;
   width: 100%;
-  background-color: #FFF;
-  padding: 10% 0px; 
 }
 
 .ability h1 {
   /* display: block; */
   text-align: center;
   font-size: 4em;
+  margin-bottom: 1rem;
+}
+
+.ability ul {
+  text-align: center;
+  padding: 0;
+}
+
+.ability li {
+  background-image: linear-gradient(9deg, blue, #b6adf0);
+  padding: 10px;
+  font-weight: 540;
+  border-radius: 20px;
+  color: var(--main-bg-color);
+  display: inline-block;
+  margin: 0 1rem;
+  width: 10%;
 }
 
 .portfolio {
   display: inline-block;
   height: 25%;
   width: 100%;
-  background-color: #FFF;
   padding: 10% 0px; 
 }
 
@@ -137,11 +221,14 @@ small {
   font-size: 4em;
 }
 
+.portfolio h3 {
+  text-align: center;
+}
+
 .writing {
   display: inline-block;
   height: 25%;
   width: 100%;
-  background-color: #FFF;
   padding: 10% 0px; 
 }
 
@@ -149,4 +236,69 @@ small {
   /* display: block; */
   text-align: center;
   font-size: 4em;
+}
+
+.card-holder {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+}
+
+.card {
+  padding: 5rem;
+}
+
+.card-holder img{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.card-holder p {
+  margin-top: 1rem;
+  text-align: justify;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+a.btn-portfolio-lainnya {
+  grid-column: 2/3;
+  margin:0 auto;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  width: 125px;
+  font-weight: 540;
+  font-size: 1rem;
+  --background-color: blue;
+  background-image: linear-gradient(9deg, blue, #b6adf0);
+  border-radius: 20px;
+  opacity: 0.8;
+}
+
+a.btn-portfolio-lainnya:hover {
+  opacity: 1;
+}
+
+.contact-me {
+  padding: 5rem;
+  
+}
+
+.contact-me div {
+  width: 20rem;
+  margin: 0 auto;
+}
+
+.contact-me h1 {
+  text-align: center;
+}
+
+.contact-me img {
+  width: 33px;
+  margin-right: 10px;
+}
+
+body.dark-background .portfolio h3, body.dark-background .info {
+  color: #F3F8FF;
 }
