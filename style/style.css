@@ -377,5 +377,9 @@ body.dark-background .portfolio h3, body.dark-background .info {
   .card-holder {
     display: block;
   }
+
+  body.dark-background .bar {
+    background-color: #f2f2f2;
+  }
   
 }
