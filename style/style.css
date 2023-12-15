@@ -26,7 +26,7 @@ nav {
 
 .menu {  
   text-align: center;
-  padding: 0px;
+  padding: 12px;
 }
 
 .menu-items {
@@ -37,7 +37,7 @@ nav {
   display: block;
   text-decoration: none;
   color: black;
-  padding: 20px 5px;
+  padding: 5px 5px;
   width: 125px;
   font-size: 1rem;
   font-weight: var(--bold-font);
@@ -45,7 +45,7 @@ nav {
 
 .link:hover {
   color: #FFF;
-  padding: 5px 5px;
+  --padding: 5px 5px;
   background-image: linear-gradient(#7B66FF, #b6adf0);
   border-radius: 25px;
   cursor: pointer;
@@ -103,7 +103,17 @@ body.dark-background {
   background-color: #1d223e;
 }
 
+.hamburger {
+  display: none;
+}
 
+.bar {
+  display: block;
+  margin-top: 4px;
+  background-color: #020202;
+  width: 25px;
+  height: 4px;
+}
 
 /* body.dark-background .ability, body.dark-background .contact-me {
   background-color: #202646;
@@ -167,7 +177,7 @@ footer {
 }
 
 .profile img{
-  width: 35%;
+  width: 20rem;
   object-fit: cover;
 }
 
@@ -302,4 +312,69 @@ a.btn-portfolio-lainnya:hover {
 
 body.dark-background .portfolio h3, body.dark-background .info {
   color: #F3F8FF;
+}
+
+@media screen and (max-width: 768px) {
+
+  .menu-container {
+    float: left;
+    width: 100%;
+  }
+  
+  .hamburger {
+    position: relative;
+    left: 92%;
+    top: 0px;
+    display: block;
+    margin: 1rem;
+    --padding: 1rem;
+  }
+
+  .hamburger:hover {
+    cursor: pointer;
+  }
+
+  .menu {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .menu-items {
+    display: block; 
+  }
+
+  .link {
+    width: 70%;
+    margin: 0.8rem auto;
+    text-align: center;
+    display: none;
+  }
+
+  .link-shown {
+    display: block;
+  }
+
+  .link:hover {
+    --padding: 0px;
+  }
+
+  .profile {
+    display: block;
+  }
+
+  .profile img {
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  
+  .ability li {
+    display: block;
+    width: 45%;
+    margin: 1rem auto;
+  }
+
+  .card-holder {
+    display: block;
+  }
+  
 }

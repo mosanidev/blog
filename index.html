@@ -9,18 +9,19 @@
 <body>
   
   <nav class="menu-container">
-    <ul class="menu">
-      <li class="menu-items"><a class="link" onclick="jumpTo('intro')">Introduction</a></li>
-      <li class="menu-items"><a class="link" onclick="jumpTo('ability')">My Expertise</a></li>
-      <li class="menu-items"><a class="link" onclick="jumpTo('portfolio')">My Portfolio</a></li>
-      <li class="menu-items"><a class="link" onclick="jumpTo('contact-me')">Contact Me</a></li>
-    </ul>
 
     <div class="hamburger" id="hamburger">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </div>
+
+    <ul class="menu">
+      <li class="menu-items"><a class="link" onclick="jumpTo('intro')">Introduction</a></li>
+      <li class="menu-items"><a class="link" onclick="jumpTo('ability')">My Expertise</a></li>
+      <li class="menu-items"><a class="link" onclick="jumpTo('portfolio')">My Portfolio</a></li>
+      <li class="menu-items"><a class="link" onclick="jumpTo('contact-me')">Contact Me</a></li>
+    </ul>
 
   </nav>
 
@@ -162,25 +163,35 @@ Best regards
     let lastScrollTop = 0;
 
 window.addEventListener("scroll", function() {
+
   let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
   if (currentScroll > lastScrollTop) {
     // Scrolling up
     document.querySelector('.menu-container').style.position = 'relative';
     document.querySelector('.menu-container').style.top = '100%';
+    
   } else {
     // Scrolling up
-    
-      
-
-       document.querySelector('.menu-container').style.position = 'sticky';
+    document.querySelector('.menu-container').style.position = 'sticky';
     document.querySelector('.menu-container').style.top = '0px';
   }
-
+  
   lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+
 }, false);
 
+document.getElementById("hamburger").addEventListener("click", function() {
+  console.log("tai")
+  var links = document.getElementsByClassName("link");
+  for (var i = 0; i < links.length; i++) {
+    links[i].classList.toggle("link-shown")
+  }
+})
 
+function toggleShowLink() {
+  
+}
   
 </script>
 </body>
