@@ -167,7 +167,7 @@ footer {
 .intro h1 {
   /* display: block; */
   text-align: center;
-  font-size: 4em;
+  font-size: 3.5em;
 }
 
 
@@ -323,8 +323,8 @@ body.dark-background .portfolio h3, body.dark-background .info {
   
   .hamburger {
     position: relative;
-    left: 92%;
-    top: 0px;
+    left: 0;
+    top: 0;
     display: block;
     margin: 1rem;
     --padding: 1rem;
@@ -360,6 +360,7 @@ body.dark-background .portfolio h3, body.dark-background .info {
 
   .profile {
     display: block;
+    padding: 1.6rem;
   }
 
   .profile img {
