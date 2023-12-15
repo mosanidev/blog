@@ -60,7 +60,8 @@ nav {
   box-shadow: 2px 3px;
   border: 1px solid black;
   padding: 11px;
-  border-radius: 50%
+  border-radius: 50%;
+  background-color: #fdfdfd;
 }
 
 .theme-switcher:hover {
