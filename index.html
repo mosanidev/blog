@@ -167,9 +167,10 @@ window.addEventListener("scroll", function() {
   let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
   if (currentScroll > lastScrollTop) {
-    // Scrolling up
+    // Scrolling dpwn
     document.querySelector('.menu-container').style.position = 'relative';
     document.querySelector('.menu-container').style.top = '100%';
+   
     
   } else {
     // Scrolling up
@@ -182,10 +183,17 @@ window.addEventListener("scroll", function() {
 }, false);
 
 document.getElementById("hamburger").addEventListener("click", function() {
-  console.log("tai")
+
   var links = document.getElementsByClassName("link");
   for (var i = 0; i < links.length; i++) {
     links[i].classList.toggle("link-shown")
+
+    if(document.querySelector(".link").classList.contains("link-shown"))
+    {
+      console.log("atess")
+      window.scrollBy(0, -42)
+    }
+     
   }
 })
 
