@@ -325,7 +325,7 @@ body.dark-background .portfolio h3, body.dark-background .info {
     position: relative;
     left: 0;
     top: 0;
-    display: block;
+    display: inline-block;
     margin: 1rem;
     --padding: 1rem;
   }
@@ -337,6 +337,7 @@ body.dark-background .portfolio h3, body.dark-background .info {
   .menu {
     width: 100%;
     padding: 0px;
+    /* display: none; */
   }
 
   .menu-items {
@@ -351,7 +352,7 @@ body.dark-background .portfolio h3, body.dark-background .info {
   }
 
   .link-shown {
-    display: block;
+    display: block; 
   }
 
   .link:hover {
