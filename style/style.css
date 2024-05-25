@@ -384,3 +384,38 @@ body.dark-background .portfolio h3, body.dark-background .info {
   }
   
 }
+
+
+.bg-login {
+  margin: 20% 0;
+  width: 100%;
+  height: 100%;
+}
+
+.input-login {
+  border: 0.5px solid black;
+  padding: 5px;
+  width: 15%;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto;
+}
+
+.input-login::placeholder {
+  text-align: center;
+}
+
+.btn-login {
+  border: 0;
+  display: block;
+  margin: 0 auto;
+  padding: 5px 0;
+  color: #F8F9D7;
+  background-color: #003285;
+  width: 10%;
+  border-radius: 5px;
+}
+
+.btn-login:hover {
+  cursor: pointer;
+}

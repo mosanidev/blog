@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" c ontent="width=device-width, initial-scale=1.0">
   <title>Home</title>
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
   
