@@ -2,9 +2,11 @@
 
 class AuthController {
     private $model;
+    private $db;
 
     public function __construct($model) {
         $this->model = $model;
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function login($username, $password) {
@@ -16,17 +18,20 @@ class AuthController {
 
             if(password_verify($password, $password_hashed)) {
                 $_SESSION['username'] = $username;
+                $_SESSION['user_id'] = $user['id'];
                 $this->admin();
+                header('Location: index.php?page=admin');
+
             } 
             else {
                 $error = "Invalid username or password";
-                include 'views/login.php';
+                include 'views/login/login.php';
             }
 
         }
         else {
             $error = "Invalid username or password";
-            include 'views/login.php';
+            include 'views/login/login.php';
         }
     }
 
@@ -42,8 +47,9 @@ class AuthController {
     }
 
     public function admin() {
-        if(isset($_SESSION['username'])) {
+        if(isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             $username = $_SESSION['username'];
+            $user_id = $_SESSION['user_id'];
             include 'views/admin.php';
         } else {
             header('Location: login.php');

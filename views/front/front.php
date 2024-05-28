@@ -43,10 +43,24 @@ Best regards
     <h1>My Expertise</h1>
     <br>
     <ul>
-      <li>HTML + CSS</li>
-      <li>PHP</li>
-      <li>C#</li>
-      <li>SQL</li>
+
+      <?php 
+          $i = 1;
+          foreach($skill as $x) {
+        ?>
+
+          <li><?php echo $x['skill']; ?></li>
+
+          <?php if(count($skill) > 6) { 
+
+              if(fmod($i, 3) == 0) {
+                  echo "<br><br><br>"; 
+                }
+              }
+
+              $i++;
+            }  
+          ?>
     </ul>
   </section>
 
@@ -147,6 +161,12 @@ Best regards
     for (var i = 0; i < links.length; i++) {
       links[i].classList.toggle("link-shown")
     }
+  }
+
+  if(window.innerWidth <= 768) {
+    document.querySelectorAll(".ability ul br").forEach(function(br) {
+      br.parentNode.removeChild(br);
+    });
   }
 
 </script>
