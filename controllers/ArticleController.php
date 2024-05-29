@@ -13,6 +13,10 @@ class ArticleController {
         include 'views/admin/article.php';
     }
 
+    public function create() {
+        include_once 'views/admin/create_new_article.php';
+    }
+
 }
 
 ?>

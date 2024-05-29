@@ -2,7 +2,7 @@
 
 <br>
 
-<a class="btn-action-admin" href="index.php?page=admin&action=new_article">Create New Article</a>
+<a class="btn-action-admin" href="index.php?page=admin&module=create_new_article">Create New Article</a>
 
 <br><br>
 

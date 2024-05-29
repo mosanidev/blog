@@ -63,8 +63,28 @@
             <label>Skill : </label>
             <input type="text" name="skill">
         </div>
-        <input type="submit"/>
+        <input type="submit" class="btn-submit-create-edit"/>
     </form>
+  </div>
+
+</div>
+
+<div id="deleteSkill" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+        <h2>Warning</h2>
+        <span class="close">×</span>
+    </div>
+    <p class="text-warning-delete">Are you sure to delete this ? </p>
+    <div class="container-btn-warning-delete">
+        <form method="POST" action="index.php?page=admin&module=skill&action=delete">
+            <input type="hidden" id="deleted_id" name="id">
+            <input type='submit' class="btn-yes-delete" value="Yes">
+            <button type="button" class="btn-no-delete">No</button>
+        </form>
+    </div>  
   </div>
 
 </div>
@@ -87,6 +107,14 @@
         modalSkill.style.display = "none";
     }
 
+    document.getElementsByClassName("close")[1].onclick = function() {
+        document.getElementById("deleteSkill").style.display = "none";
+    }
+
+    document.getElementsByClassName("btn-no-delete")[0].onclick = function() {
+        document.getElementById("deleteSkill").style.display = "none";
+    }
+
     window.onclick = function(event) {
         if (event.target == modalSkill) {
             modalSkill.style.display = "none";
@@ -104,11 +132,9 @@
 
     function hapus(id) {
         
-        document.getElementById('formCreateEdit').setAttribute("action", "index.php?page=admin&module=skill&action=delete");
+        document.getElementById("deleteSkill").style.display = "block";
 
-        document.querySelector('input[name=id]').value = id;
-        
-        document.getElementById('formCreateEdit').submit();
+        document.getElementById("deleted_id").value = id;
     }
 
 </script>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="style/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container-menu-admin">
@@ -26,6 +27,13 @@
                         $articleController = new ArticleController($articleModel);
 
                         $articleController->index();
+                    }
+
+                    if($module == "create_new_article") {
+                        $articleModel = new ArticleModel();
+                        $articleController = new ArticleController($articleModel);
+
+                        $articleController->create();
                     }
 
                     if($module == "skill") {
