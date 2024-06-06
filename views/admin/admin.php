@@ -6,6 +6,7 @@
     <title>Admin</title>
     <link rel="stylesheet" href="style/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 </head>
 <body>
     <div class="container-menu-admin">
@@ -29,11 +30,11 @@
                         $articleController->index();
                     }
 
-                    if($module == "create_new_article") {
+                    if($module == "create_edit_article") {
                         $articleModel = new ArticleModel();
                         $articleController = new ArticleController($articleModel);
 
-                        $articleController->create();
+                        $articleController->createEdit();
                     }
 
                     if($module == "skill") {

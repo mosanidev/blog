@@ -107,11 +107,11 @@
         modalSkill.style.display = "none";
     }
 
-    document.getElementsByClassName("close")[1].onclick = function() {
+    document.querySelector("#deleteSkill .close").onclick = function() {
         document.getElementById("deleteSkill").style.display = "none";
     }
 
-    document.getElementsByClassName("btn-no-delete")[0].onclick = function() {
+    document.querySelector("#deleteSkill .btn-no-delete").onclick = function() {
         document.getElementById("deleteSkill").style.display = "none";
     }
 
@@ -134,7 +134,7 @@
         
         document.getElementById("deleteSkill").style.display = "block";
 
-        document.getElementById("deleted_id").value = id;
+        document.querySelector("#deleteSkill #deleted_id").value = id;
     }
 
 </script>

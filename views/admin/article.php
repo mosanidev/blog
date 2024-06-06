@@ -2,7 +2,7 @@
 
 <br>
 
-<a class="btn-action-admin" href="index.php?page=admin&module=create_new_article">Create New Article</a>
+<a class="btn-action-admin" href="index.php?page=admin&module=create_edit_article">Create New Article</a>
 
 <br><br>
 
@@ -16,7 +16,7 @@
     </thead>
     <tbody>
 
-        <?php 
+        <?php
             if($article != null) {
                     $num = 1;
 
@@ -24,9 +24,9 @@
                         
                 ?>
                     <tr>
-                        <td width="40" style="text-align: center;"><?php echo $num; ?></td>
-                        <td><?php echo $article[$i]['judul']; ?></td>
-                        <td width="150" style="text-align: center;"><a class="btn-action-admin" href="index.php?page=admin&action=edit_article">Ubah</a> <a class="btn-action-admin" href="index.php?page=admin&action=delete_article">Hapus</a></td>
+                        <td width="40" style="text-align: center;"><?= $num; ?></td>
+                        <td><?= $article[$i]['judul']; ?></td>
+                        <td width="150" style="text-align: center;"><a class="btn-action-admin" href="index.php?page=admin&module=create_edit_article&id=<?= $article[$i]["id"] ?>">Ubah</a> <a class="btn-action-admin" type="button" onclick="hapus(<?php echo $article[$i]['id']; ?>)">Hapus</a></td>
                     </tr>
                 <?php
                      $num++;
@@ -46,3 +46,42 @@
         
     </tbody>
 </table>
+
+
+<div id="deleteArticle" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+        <h2>Warning</h2>
+        <span class="close">×</span>
+    </div>
+    <p class="text-warning-delete">Are you sure to delete this ? </p>
+    <div class="container-btn-warning-delete">
+        <form method="POST" action="index.php?page=admin&module=article&action=delete">
+            <input type="hidden" id="deleted_id" name="id">
+            <input type='submit' class="btn-yes-delete" value="Yes">
+            <button type="button" class="btn-no-delete">No</button>
+        </form>
+    </div>  
+  </div>
+
+</div>
+
+<script>
+
+    document.querySelector("#deleteArticle .close").onclick = function() {
+        document.getElementById("deleteArticle").style.display = "none";
+    }
+
+    document.querySelector("#deleteArticle .btn-no-delete").onclick = function() {
+        document.getElementById("deleteArticle").style.display = "none";
+    }
+
+    function hapus(id) {
+        
+        document.getElementById("deleteArticle").style.display = "block";
+
+        document.querySelector("#deleteArticle #deleted_id").value = id;
+    }
+ </script>

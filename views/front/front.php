@@ -28,11 +28,10 @@
 
     <div class="profile">
       <p>
-Greetings,<br><br>
+Greetings,<br><br><br>
 
-I'm Sani, a budding developer experienced in PHP, HTML, CSS, Bootstrap, C#, ASP.NET, and adept in MySQL and SQL Server databases. My journey spans website creation, crafting seamless user experiences, alongside forays into Epicor development. I thrive in collaborative settings, blending problem-solving finesse with teamwork, seeking new challenges to apply my evolving skill set. Eager to contribute and grow within any dynamic development team, I look forward to the next opportunity to innovate and learn. <br><br>
+I'm Sani, a developer who love to learn and seeking new challenges to apply my evolving skill set. <br><br>
 
-Best regards
       </p>
       <img src="src/img/profile-image.png">
     </div>

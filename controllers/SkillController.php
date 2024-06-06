@@ -59,7 +59,6 @@ class SkillController {
         $stmt->bind_param("i", $id);
         $stmt->execute();
 
-        echo $id;
         if($stmt->affected_rows > 0) {
             header("Location: index.php?page=admin&module=skill");
         }

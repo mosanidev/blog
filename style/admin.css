@@ -81,6 +81,7 @@ body {
     color: var(--main-bg-color);
     display: inline-block;
     opacity: 0.8;
+    border: 0;
 }
 
 .btn-action-admin:hover {
@@ -132,8 +133,6 @@ body {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
-
 
 .modal-content {
   background-color: #fefefe;
@@ -230,4 +229,9 @@ body {
 .container-btn-warning-delete form .btn-no-delete:hover , .container-btn-warning-delete form .btn-yes-delete:hover {
     opacity: 1;
     cursor: pointer;
+}
+
+
+.ck-editor__editable {
+    min-height: 400px;
 }

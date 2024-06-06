@@ -24,37 +24,71 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
         $authController->login($username, $password);
     }
-    else if($page == 'admin' && $module == 'skill') {
+    else if($page == 'admin') {
 
-        if($action == 'add') {
-            $skillModel = new SkillModel();
-            $skillController = new SkillController($skillModel);
-            $skill = $_POST['skill'];
+        if($module == 'skill') {
 
-            $user_id = $_SESSION['user_id'];
-
-            $skillController->create($skill, $user_id);
+            if($action == 'add') {
+                $skillModel = new SkillModel();
+                $skillController = new SkillController($skillModel);
+                $skill = $_POST['skill'];
+    
+                $user_id = $_SESSION['user_id'];
+    
+                $skillController->create($skill, $user_id);
+            }
+            
+            if($action == 'update') {
+                $skillModel = new SkillModel();
+                $skillController = new SkillController($skillModel);
+                $skill = $_POST['skill'];
+                $id = $_POST['id'];
+                //$user_id = $_SESSION['user_id'];
+    
+                $skillController->update($skill, $id);
+            }
+    
+            if($action == 'delete') {
+                $skillModel = new SkillModel();
+                $skillController = new SkillController($skillModel);
+                $id = $_POST['id'];
+                //$user_id = $_POST['user_id'];
+    
+                $skillController->delete($id);
+            }
         }
-        
-        if($action == 'update') {
-            $skillModel = new SkillModel();
-            $skillController = new SkillController($skillModel);
-            $skill = $_POST['skill'];
-            $id = $_POST['id'];
-            //$user_id = $_SESSION['user_id'];
 
-            $skillController->update($skill, $id);
+        if($module == 'article') {
+
+            if($action == 'addUpdate') {
+
+                $id = $_POST['id'] ?? "";
+
+                $articleModel = new ArticleModel();
+
+                $articleController = new ArticleController($articleModel);
+                
+                $_POST['user_id'] = $_SESSION['user_id'];
+
+                $articleModel->fill($_POST);
+
+                if($id == "") {
+                    $articleController->createPOST($articleModel);
+                } 
+                else {
+                    $articleController->update($articleModel);
+                }
+
+            }
+            
+            if($action == 'delete') {
+                $id = $_POST['id'];
+
+                $articleModel = new ArticleModel();
+                $articleController = new ArticleController($articleModel);
+                $articleController->delete($id);
+            }
         }
-
-        if($action == 'delete') {
-            $skillModel = new SkillModel();
-            $skillController = new SkillController($skillModel);
-            $id = $_POST['id'];
-            //$user_id = $_POST['user_id'];
-
-            $skillController->delete($id);
-        }
-        
     }
     else {
         $authController->showLoginForm();

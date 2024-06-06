@@ -3,8 +3,24 @@
 class ArticleModel {
     private $db;
 
+    public $id;
+    public $judul;
+    public $isi;
+    public $user_id;
+
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
+    }
+
+    public function fill($array) {
+        $model = array();
+
+        if(count($array) > 0) {
+            $this->id = ($array["id"] != null || $array["id"] != "") ? $array["id"] : 0;
+            $this->judul = $array["judul"];
+            $this->isi = $array["isi"];
+            $this->user_id = $array["user_id"];
+        }
     }
 
     public function getArticle() {
