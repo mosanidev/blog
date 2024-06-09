@@ -1,3 +1,11 @@
+<?php
+
+    if(!isset($_SESSION['user_id'])) {
+        header("Location: index.php?page=login");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +23,7 @@
                 <li><a href="index.php?page=admin&module=article">Article</a></li>
                 <li><a href="index.php?page=admin&module=skill">Skill</a></li>
                 <li><a href="index.php?page=admin&module=portfolio">Portfolio</a></li>
+                <li><a href="index.php?page=admin&action=logout">Logout</a></li>
             </ul>
         </div>
         <div class="content-admin">
@@ -42,6 +51,20 @@
                         $skillController = new SkillController($skillModel);
 
                         $skillController->index();
+                    }
+
+                    if($module == "portfolio") {
+                        $portfolioModel = new PortfolioModel();
+                        $portfolioController = new PortfolioController($portfolioModel);
+
+                        $portfolioController->index();
+                    }
+
+                    if($module == "create_edit_portfolio") {
+                        $portfolioModel = new PortfolioModel();
+                        $portfolioController = new PortfolioController($portfolioModel);
+
+                        $portfolioController->createEdit();
                     }
                 }
             ?>

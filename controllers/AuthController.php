@@ -17,6 +17,7 @@ class AuthController {
             $password_hashed = $user['password'];
 
             if(password_verify($password, $password_hashed)) {
+                session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $user['id'];
                 $this->admin();
@@ -62,7 +63,7 @@ class AuthController {
 
     public function logout() {
         session_destroy();
-        header('Location: login.php');
+        header('Location: index.php?page=login');
     }
 }
 

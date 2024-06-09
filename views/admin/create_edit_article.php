@@ -6,6 +6,10 @@
 
 ?>
 
+<a href="index.php?page=admin&module=article"><- Kembali</a>
+
+<br>
+
 <h1>Create New Article</h1>
 
 <br>
@@ -29,7 +33,6 @@
     <button type="submit" class="btn-action-admin" style="margin: 10px auto; width:100px;">Simpan</button>
 </form>
 
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 <script>
      ClassicEditor
         .create( document.querySelector( '#editor' ) )

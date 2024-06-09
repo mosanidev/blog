@@ -6,9 +6,11 @@ require_once 'config/database.php';
 require_once 'models/UserModel.php';
 require_once 'models/ArticleModel.php';
 require_once 'models/SkillModel.php';
+require_once 'models/PortfolioModel.php';
 require_once 'controllers/AuthController.php';
 require_once 'controllers/ArticleController.php';
 require_once 'controllers/SkillController.php';
+require_once 'controllers/PortfolioController.php';
 
 $userModel = new UserModel();
 $authController = new AuthController($userModel);
@@ -72,13 +74,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $articleModel->fill($_POST);
 
-                if($id == "") {
-                    $articleController->createPOST($articleModel);
-                } 
-                else {
-                    $articleController->update($articleModel);
-                }
-
+                $articleController->createUpdatePOST($articleModel);
+                
             }
             
             if($action == 'delete') {
@@ -88,6 +85,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $articleController = new ArticleController($articleModel);
                 $articleController->delete($id);
             }
+        }
+
+        if($module == "portfolio") {
+
+            if($action == 'addUpdate') {
+
+                $id = $_POST['id'] ?? "";
+
+                $portfolioModel = new PortfolioModel();
+
+                $portfolioController = new PortfolioController($portfolioModel);
+                
+                $_POST['user_id'] = $_SESSION['user_id'];
+
+                $portfolioModel->fill($_POST);
+
+                $portfolioController->createUpdatePOST($portfolioModel);
+
+            }
+
         }
     }
     else {
@@ -100,9 +117,15 @@ else  {
     {
         if(file_exists("views/$page")) {
             include_once("views/$page/$page.php");
+
         }
         else {
             include_once("views/front/front.php");
+        }
+
+        
+        if($action == 'logout') {
+            $authController->logout();
         }
     }
     else 
