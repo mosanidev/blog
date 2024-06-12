@@ -21,6 +21,27 @@ class PortfolioController {
 
     public function createUpdatePOST($model) {
         var_dump($model);
+
+        // $id = $model->id;
+        // $judul = $model->judul;
+        // $deskripsi = $model->deskripsi;
+        // $foto = $model->foto;
+        // $link = $model->link;
+        // $user_id = $model->user_id;
+
+        // if($id == 0)
+        // {
+        //     $stmt = $this->db->prepare("INSERT INTO portfolio (judul, deskripsi, foto, link, user_id) VALUES (?,?,?,?)");
+        //     $stmt->bind_param("ssss", $judul, $deskripsi, $foto, $link, $user_id);
+        //     $stmt->execute();
+        // }
+        // else {
+        //     
+        // }
+
+        // if($stmt->affected_rows > 0) {
+        //     header("Location: index.php?page=admin&module=article");
+        // }
     }
 
 }

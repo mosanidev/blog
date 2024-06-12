@@ -2,6 +2,7 @@
 
     $id = $article['id'] ?? "";
     $judul = $article['judul'] ?? "";
+    $akses = $article['akses'] ?? "";
     $isi = $article['isi'] ?? "";
 
 ?>
@@ -21,6 +22,13 @@
     <div class="form-input">
         <label>Judul</label>
         <input type="text" name="judul" value="<?= $judul ?>">
+    </div>
+
+    
+    <div class="form-input">
+        <label>Akses</label>
+        <input type="radio" name="akses" value="Publik" <?php if($akses == "Publik") { echo "checked";} ?>>Publik
+        <input type="radio" name="akses" value="Privat" <?php if($akses == "Privat") { echo "checked";} ?>>Privat
     </div>
 
     <div class="form-input">

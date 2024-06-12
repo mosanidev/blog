@@ -15,7 +15,6 @@ class PortfolioModel {
     }
 
     public function fill($array) {
-        $model = array();
 
         if(count($array) > 0) {
             $this->id = ($array["id"] != null || $array["id"] != "") ? $array["id"] : 0;
@@ -25,6 +24,7 @@ class PortfolioModel {
             $this->link = $array["link"];
             $this->user_id = $array["user_id"];
         }
+
     }
 
     public function getPortfolio() {

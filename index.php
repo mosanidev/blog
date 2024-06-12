@@ -91,18 +91,65 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if($action == 'addUpdate') {
 
+                var_dump($_FILES);
+
+                /*
                 $id = $_POST['id'] ?? "";
+                $judul = $_POST['judul'];
+                $deskripsi = $_POST['deskripsi'];
+                $link = $_POST['link'];
+                $deletedFiles = $_POST['deletedFiles'];
+
+                $deletedFiles = explode(',', trim($deletedFiles, ','));
+                $foto = null;
+                $num = 1;
+
+                if(isset($_FILES['foto'])) {
+
+                    foreach ($_FILES['foto']['name'] as $index => $name) {
+                        if (in_array($name, $deletedFiles)) {
+                            continue;
+                        }
+    
+                        if ($_FILES['foto']['error'][$index] === UPLOAD_ERR_OK) {
+        
+                            $uploadDir = 'src/img/uploads/portfolio/';
+                            //$uploadFile = $uploadDir . basename($_FILES['foto']['name'][$index]);
+    
+                            $type = explode("/", $_FILES['foto']['type'][$index])[1];
+        
+                            $uploadFile = $uploadDir . $judul . "_" . $num . "." . $type;   
+                            
+                            $foto .= $uploadFile;
+    
+                            if (!move_uploaded_file($_FILES['foto']['tmp_name'][$index], $uploadFile)) {
+                                echo "<p>Error moving file to $uploadFile</p>";
+                                break;
+                            } 
+
+                            $foto .= ",";
+    
+                        } else {
+                            echo "<p>Error uploading file: " . $_FILES['fileInput']['error'][$index] . "</p>";
+                            break;
+                        }
+    
+                        $num++;
+                    }
+                }
 
                 $portfolioModel = new PortfolioModel();
 
                 $portfolioController = new PortfolioController($portfolioModel);
                 
                 $_POST['user_id'] = $_SESSION['user_id'];
+                $_POST['foto'] = $foto;
 
                 $portfolioModel->fill($_POST);
 
                 $portfolioController->createUpdatePOST($portfolioModel);
 
+                */
             }
 
         }

@@ -21,7 +21,7 @@
 
     <div class="form-input">
         <label>Judul :</label>
-        <input type="text" name="judul" value="<?= $judul ?>">
+        <input type="text" name="judul" value="<?= $judul ?>" required>
     </div>
 
     <div class="form-input">
@@ -33,9 +33,21 @@
 
     <div class="form-input">
         <label>Foto :</label>
-        <input type="file" name="foto[]" id="fileInput" accept="image/png, image/gif, image/jpeg" multiple>
+        <div id="file-upload-1" style="display: inline;">
+            <div class="btn-upload-img btn-upload-img-1" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
+            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        </div>
+        <div id="file-upload-2" style="display: inline;">
+            <div class="btn-upload-img btn-upload-img-2" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
+            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        </div>
+        <div id="file-upload-3" style="display: inline;">
+            <div class="btn-upload-img btn-upload-img-3" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
+            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        </div>
         <div id="container-upload">
         </div>
+        <input type="hidden" name="deletedFiles" id="deletedFiles" value="">
     </div>
 
     <div class="form-input">
@@ -47,27 +59,73 @@
 </form>
 
 <script>
+
+    function clickUpload() {
+        const idx = document.querySelectorAll('input[type=file]').length
+
+        document.querySelector(`input[name=foto-${idx}]`).click()
+        document.querySelector(`.btn-upload-img-${idx}`).style.display = 'none';
+
+        document.getElementById('file-upload').innerHTML += `
+           <div class="btn-upload-img btn-upload-img-${idx+1}" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
+            <input type="file" name="foto-${idx+1}" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        `;
+
+    }
+
+    // document.getElementsByClassName('btn-upload-img')[0].addEventListener('click', function(event) {
+        
+    // })
+
     document.getElementById('fileInput').addEventListener('change', function(event) {
 
-        document.querySelectorAll("#preview-upload img").forEach( function(e) {
-            e.remove()
-        })
+        const files = event.target.files;
+        const previewContainer = document.getElementById('container-upload');
+        const deletedFilesInput = document.getElementById('deletedFiles');
+        //const previewContainer = document.getElementById('div-container-upload');
 
-        const files =  event.target.files;
-        
-        if(files.length > 0) {
-            
-            for (let i = 0; i < files.length; i++) {
-                const reader = new FileReader();
-                const file = files[i];
+        // Clear existing previews
+        // document.getElementById('div-container-upload').classList.remove('btn-upload-img')
+        previewContainer.innerHTML = '';
 
-                reader.onload = function(e) {
-                    document.getElementById('container-upload').innerHTML += "<div class='preview-upload'><img src='" + e.target.result + "'><p>X</p></div>";
-                }   
+        Array.from(files).forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewItem = document.createElement('div');
+                previewItem.classList.add('preview-upload');
 
-                reader.readAsDataURL(file);
-            }
-            
-        }
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Image Preview';
+                
+                const removeButton = document.createElement('button');
+                removeButton.type = 'button';
+                removeButton.textContent = 'X';
+                removeButton.classList.add('remove-preview');
+                removeButton.addEventListener('click', () => {
+                    deletedFilesInput.value += file.name + ',';
+                    previewContainer.removeChild(previewItem);
+
+                    if(document.getElementById('container-upload').children.length == 0) {
+                        // jika kosong
+                        document.getElementById('div-container-upload').style.display = 'block';
+                    }
+                });
+
+                previewItem.appendChild(img);
+                previewItem.appendChild(removeButton);
+                previewContainer.appendChild(previewItem);
+            };
+            reader.readAsDataURL(file);
+        });
     })
+
+    // window.addEventListener("click", function(event) {
+
+    //     if(event.target.classList.contains('remove-preview')) {
+    //         event.target.parentElement.remove()
+    //     }
+    // });
+
+    
 </script>

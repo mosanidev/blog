@@ -5,6 +5,7 @@ class ArticleModel {
 
     public $id;
     public $judul;
+    public $akses;
     public $isi;
     public $user_id;
 
@@ -13,11 +14,12 @@ class ArticleModel {
     }
 
     public function fill($array) {
-        $model = array();
+        //$model = array();
 
         if(count($array) > 0) {
             $this->id = ($array["id"] != null || $array["id"] != "") ? $array["id"] : 0;
             $this->judul = $array["judul"];
+            $this->akses = $array["akses"];
             $this->isi = $array["isi"];
             $this->user_id = $array["user_id"];
         }

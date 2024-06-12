@@ -49,18 +49,19 @@ class ArticleController {
     {
         $id = $model->id;
         $judul = $model->judul;
+        $akses = $model->akses;
         $isi = $model->isi;
         $user_id = $model->user_id;
 
         if($id == 0)
         {
-            $stmt = $this->db->prepare("INSERT INTO article (judul, isi, user_id) VALUES (?,?,?)");
-            $stmt->bind_param("sss", $judul, $isi, $user_id);
+            $stmt = $this->db->prepare("INSERT INTO article (judul, akses, isi, user_id) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $judul, $akses, $isi, $user_id);
             $stmt->execute();
         }
         else {
-            $stmt = $this->db->prepare("UPDATE article SET judul = ? , isi = ? , user_id = ? WHERE id = ?");
-            $stmt->bind_param("ssss", $judul, $isi, $user_id, $id);
+            $stmt = $this->db->prepare("UPDATE article SET judul = ? , akses = ? , isi = ? , user_id = ? WHERE id = ?");
+            $stmt->bind_param("sssss", $judul, $akses, $isi, $user_id, $id);
             $stmt->execute();
         }
 

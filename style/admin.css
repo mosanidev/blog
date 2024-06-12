@@ -257,8 +257,10 @@ body {
 }
 
 .preview-upload {
+    display: inline;
     margin-top: 15px;
     position: relative;
+    width: 50px;
 }
 
 .preview-upload img {
@@ -268,9 +270,39 @@ body {
     object-fit: contain;
 }
 
-.preview-upload p {
+.preview-upload .remove-preview {
+    color: red;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0px 5px;
+    font-weight: 700;
+    box-shadow:1px 2px #8888;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    
+    top: -595%;
+    left: 75%;
+}
+
+.preview-upload .remove-preview:hover {
+    cursor: pointer;
+}
+
+.btn-upload-img {
+    padding: 50px 10px;
+    text-align: center;
+    border: 1px solid blue;
+    background-color: white;
+    color: blue;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    width: 15%;
+    margin: 10px 15px 010px 0px;
+    display: inline-block;
+}
+
+.btn-upload-img:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
 }
