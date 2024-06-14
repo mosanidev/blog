@@ -35,16 +35,18 @@
         <label>Foto :</label>
         <div id="file-upload-1" style="display: inline;">
             <div class="btn-upload-img btn-upload-img-1" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto-1" style="display:none;" onchange="fileUpload();" id="fileInput" accept="image/png, image/gif, image/jpeg">
         </div>
-        <div id="file-upload-2" style="display: inline;">
+        <div id="form-upload-container" style="display: inline;">
+        </div>
+        <!-- <div id="file-upload-2" style="display: inline;">
             <div class="btn-upload-img btn-upload-img-2" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
             <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
         </div>
         <div id="file-upload-3" style="display: inline;">
             <div class="btn-upload-img btn-upload-img-3" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
             <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
-        </div>
+        </div> -->
         <div id="container-upload">
         </div>
         <input type="hidden" name="deletedFiles" id="deletedFiles" value="">
@@ -66,18 +68,14 @@
         document.querySelector(`input[name=foto-${idx}]`).click()
         document.querySelector(`.btn-upload-img-${idx}`).style.display = 'none';
 
-        document.getElementById('file-upload').innerHTML += `
+        document.getElementById('form-upload-container').innerHTML += `
            <div class="btn-upload-img btn-upload-img-${idx+1}" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-${idx+1}" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto-${idx+1}" style="display:none;" onchange="fileUpload();" id="fileInput" accept="image/png, image/gif, image/jpeg">
         `;
 
     }
 
-    // document.getElementsByClassName('btn-upload-img')[0].addEventListener('click', function(event) {
-        
-    // })
-
-    document.getElementById('fileInput').addEventListener('change', function(event) {
+    function fileUpload() {
 
         const files = event.target.files;
         const previewContainer = document.getElementById('container-upload');
@@ -86,7 +84,7 @@
 
         // Clear existing previews
         // document.getElementById('div-container-upload').classList.remove('btn-upload-img')
-        previewContainer.innerHTML = '';
+        //previewContainer.innerHTML = '';
 
         Array.from(files).forEach((file, index) => {
             const reader = new FileReader();
@@ -106,6 +104,14 @@
                     deletedFilesInput.value += file.name + ',';
                     previewContainer.removeChild(previewItem);
 
+                    var idDeleted = document.getElementsByClassName('btn-upload-img').length;
+
+                    document.querySelector(`input[name=foto-${idDeleted}]`).remove();
+                    document.querySelector(`.btn-upload-img-${idDeleted}`).remove();
+
+                    document.querySelector(`input[name=foto-${idDeleted-1}]`).remove();
+                    document.querySelector(`.btn-upload-img-${idDeleted-1}`).remove();
+
                     if(document.getElementById('container-upload').children.length == 0) {
                         // jika kosong
                         document.getElementById('div-container-upload').style.display = 'block';
@@ -118,6 +124,54 @@
             };
             reader.readAsDataURL(file);
         });
+        
+    }
+
+    // document.getElementsByClassName('btn-upload-img')[0].addEventListener('click', function(event) {
+        
+    // })
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+
+        // const files = event.target.files;
+        // const previewContainer = document.getElementById('container-upload');
+        // const deletedFilesInput = document.getElementById('deletedFiles');
+        // //const previewContainer = document.getElementById('div-container-upload');
+
+        // // Clear existing previews
+        // // document.getElementById('div-container-upload').classList.remove('btn-upload-img')
+        // previewContainer.innerHTML = '';
+
+        // Array.from(files).forEach((file, index) => {
+        //     const reader = new FileReader();
+        //     reader.onload = function(e) {
+        //         const previewItem = document.createElement('div');
+        //         previewItem.classList.add('preview-upload');
+
+        //         const img = document.createElement('img');
+        //         img.src = e.target.result;
+        //         img.alt = 'Image Preview';
+                
+        //         const removeButton = document.createElement('button');
+        //         removeButton.type = 'button';
+        //         removeButton.textContent = 'X';
+        //         removeButton.classList.add('remove-preview');
+        //         removeButton.addEventListener('click', () => {
+        //             deletedFilesInput.value += file.name + ',';
+        //             previewContainer.removeChild(previewItem);
+
+        //             if(document.getElementById('container-upload').children.length == 0) {
+        //                 // jika kosong
+        //                 document.getElementById('div-container-upload').style.display = 'block';
+        //             }
+        //         });
+
+        //         previewItem.appendChild(img);
+        //         previewItem.appendChild(removeButton);
+        //         previewContainer.appendChild(previewItem);
+        //     };
+        //     reader.readAsDataURL(file);
+        // });
     })
 
     // window.addEventListener("click", function(event) {
