@@ -35,7 +35,8 @@
         <label>Foto :</label>
         <div id="file-upload-1" style="display: inline;">
             <div class="btn-upload-img btn-upload-img-1" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-1" style="display:none;" onchange="fileUpload();" id="fileInput" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto" onchange="fileUpload();" id="fileInput" style="display: none;" accept="image/png, image/gif, image/jpeg" multiple>
+            <input type="text" name="foto_tmp_name" id="foto_tmp_name">
         </div>
         <div id="form-upload-container" style="display: inline;">
         </div>
@@ -63,6 +64,7 @@
 <script>
 
     function clickUpload() {
+        /*
         const idx = document.querySelectorAll('input[type=file]').length
 
         document.querySelector(`input[name=foto-${idx}]`).click()
@@ -72,6 +74,9 @@
            <div class="btn-upload-img btn-upload-img-${idx+1}" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
             <input type="file" name="foto-${idx+1}" style="display:none;" onchange="fileUpload();" id="fileInput" accept="image/png, image/gif, image/jpeg">
         `;
+        */
+        
+        document.querySelector('input[name=foto]').click();
 
     }
 
@@ -80,6 +85,7 @@
         const files = event.target.files;
         const previewContainer = document.getElementById('container-upload');
         const deletedFilesInput = document.getElementById('deletedFiles');
+        const fileUploadContainer = document.getElementById('foto_tmp_name');
         //const previewContainer = document.getElementById('div-container-upload');
 
         // Clear existing previews
@@ -87,6 +93,7 @@
         //previewContainer.innerHTML = '';
 
         Array.from(files).forEach((file, index) => {
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 const previewItem = document.createElement('div');
@@ -95,6 +102,9 @@
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.alt = 'Image Preview';
+
+                //let fileName = files.length == 1 ? file.name : '/' + file.name;
+                fileUploadContainer.value += file.name; 
                 
                 const removeButton = document.createElement('button');
                 removeButton.type = 'button';
@@ -104,18 +114,7 @@
                     deletedFilesInput.value += file.name + ',';
                     previewContainer.removeChild(previewItem);
 
-                    var idDeleted = document.getElementsByClassName('btn-upload-img').length;
-
-                    document.querySelector(`input[name=foto-${idDeleted}]`).remove();
-                    document.querySelector(`.btn-upload-img-${idDeleted}`).remove();
-
-                    document.querySelector(`input[name=foto-${idDeleted-1}]`).remove();
-                    document.querySelector(`.btn-upload-img-${idDeleted-1}`).remove();
-
-                    if(document.getElementById('container-upload').children.length == 0) {
-                        // jika kosong
-                        document.getElementById('div-container-upload').style.display = 'block';
-                    }
+                    fileUploadContainer.value = fileUploadContainer.value.replace(file.name + '/', "");
                 });
 
                 previewItem.appendChild(img);

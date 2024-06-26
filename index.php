@@ -91,7 +91,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if($action == 'addUpdate') {
 
-                var_dump($_FILES);
+                var_dump($_FILES['foto-1']['tmp_name']);
 
                 /*
                 $id = $_POST['id'] ?? "";
