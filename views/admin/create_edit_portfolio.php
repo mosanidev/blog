@@ -32,25 +32,19 @@
     </div>
 
     <div class="form-input">
-        <label>Foto :</label>
+        <label>Foto :</label><br>
         <div id="file-upload-1" style="display: inline;">
-            <div class="btn-upload-img btn-upload-img-1" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto" onchange="fileUpload();" id="fileInput" style="display: none;" accept="image/png, image/gif, image/jpeg" multiple>
-            <input type="text" name="foto_tmp_name" id="foto_tmp_name">
+            <div class="btn-upload-img foto-1" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
+            <input type="file" name="foto-1" onchange="fileUpload();" id="fileInput-1" style="display: none;" accept="image/png, image/gif, image/jpeg">
         </div>
-        <div id="form-upload-container" style="display: inline;">
-        </div>
-        <!-- <div id="file-upload-2" style="display: inline;">
-            <div class="btn-upload-img btn-upload-img-2" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        <div id="file-upload-2" style="display: inline;">
+            <div class="btn-upload-img foto-2" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
+            <input type="file" name="foto-2" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
         </div>
         <div id="file-upload-3" style="display: inline;">
-            <div class="btn-upload-img btn-upload-img-3" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-1" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
-        </div> -->
-        <div id="container-upload">
-        </div>
-        <input type="hidden" name="deletedFiles" id="deletedFiles" value="">
+            <div class="btn-upload-img foto-3" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
+            <input type="file" name="foto-3" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+        </div> 
     </div>
 
     <div class="form-input">
@@ -63,34 +57,21 @@
 
 <script>
 
-    function clickUpload() {
-        /*
-        const idx = document.querySelectorAll('input[type=file]').length
-
-        document.querySelector(`input[name=foto-${idx}]`).click()
-        document.querySelector(`.btn-upload-img-${idx}`).style.display = 'none';
-
-        document.getElementById('form-upload-container').innerHTML += `
-           <div class="btn-upload-img btn-upload-img-${idx+1}" id="div-container-upload" onclick="clickUpload()">+ Upload</div>
-            <input type="file" name="foto-${idx+1}" style="display:none;" onchange="fileUpload();" id="fileInput" accept="image/png, image/gif, image/jpeg">
-        `;
-        */
+    function clickUpload(event) {
         
-        document.querySelector('input[name=foto]').click();
+        let clickedElement = event.target;
+        document.querySelector('input[name=' + clickedElement.classList[1] +']').value = '';
+        document.querySelector('input[name=' + clickedElement.classList[1] +']').click();
 
     }
 
     function fileUpload() {
 
         const files = event.target.files;
-        const previewContainer = document.getElementById('container-upload');
-        const deletedFilesInput = document.getElementById('deletedFiles');
-        const fileUploadContainer = document.getElementById('foto_tmp_name');
-        //const previewContainer = document.getElementById('div-container-upload');
+        const previewContainer = event.target.parentElement;    
 
-        // Clear existing previews
-        // document.getElementById('div-container-upload').classList.remove('btn-upload-img')
-        //previewContainer.innerHTML = '';
+        const children1 = previewContainer.children[0];
+        const children2 = previewContainer.children[1];
 
         Array.from(files).forEach((file, index) => {
 
@@ -102,24 +83,19 @@
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.alt = 'Image Preview';
-
-                //let fileName = files.length == 1 ? file.name : '/' + file.name;
-                fileUploadContainer.value += file.name; 
                 
                 const removeButton = document.createElement('button');
                 removeButton.type = 'button';
                 removeButton.textContent = 'X';
                 removeButton.classList.add('remove-preview');
                 removeButton.addEventListener('click', () => {
-                    deletedFilesInput.value += file.name + ',';
-                    previewContainer.removeChild(previewItem);
-
-                    fileUploadContainer.value = fileUploadContainer.value.replace(file.name + '/', "");
+                    previewItem.replaceWith(children1);
+                    children2.value = '';
                 });
 
                 previewItem.appendChild(img);
                 previewItem.appendChild(removeButton);
-                previewContainer.appendChild(previewItem);
+                children1.replaceWith(previewItem);
             };
             reader.readAsDataURL(file);
         });
@@ -130,7 +106,7 @@
         
     // })
 
-    document.getElementById('fileInput').addEventListener('change', function(event) {
+    // document.getElementById('fileInput').addEventListener('change', function(event) {
 
         // const files = event.target.files;
         // const previewContainer = document.getElementById('container-upload');
@@ -171,7 +147,7 @@
         //     };
         //     reader.readAsDataURL(file);
         // });
-    })
+    // })
 
     // window.addEventListener("click", function(event) {
 
