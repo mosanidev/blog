@@ -3,12 +3,12 @@
 class PortfolioModel {
     private $db;
 
-    private $id;
-    private $judul;
-    private $deskripsi;
-    private $foto;
-    private $link;
-    private $user_id;
+    public $id;
+    public $judul;
+    public $deskripsi;
+    public $foto;
+    public $link;
+    public $user_id;
 
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();

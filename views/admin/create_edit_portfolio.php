@@ -26,9 +26,7 @@
 
     <div class="form-input">
         <label>Deskripsi :</label><br>
-        <textarea name="deskripsi" rowspan="4">
-           
-        </textarea>
+        <textarea name="deskripsi" rows="6"></textarea>
     </div>
 
     <div class="form-input">
@@ -73,88 +71,40 @@
         const children1 = previewContainer.children[0];
         const children2 = previewContainer.children[1];
 
-        Array.from(files).forEach((file, index) => {
+        const isItImage = files[0].type.includes('image');
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const previewItem = document.createElement('div');
-                previewItem.classList.add('preview-upload');
+        if(isItImage == true) {
+            Array.from(files).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.classList.add('preview-upload');
 
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Image Preview';
-                
-                const removeButton = document.createElement('button');
-                removeButton.type = 'button';
-                removeButton.textContent = 'X';
-                removeButton.classList.add('remove-preview');
-                removeButton.addEventListener('click', () => {
-                    previewItem.replaceWith(children1);
-                    children2.value = '';
-                });
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Image Preview';
+                    
+                    const removeButton = document.createElement('button');
+                    removeButton.type = 'button';
+                    removeButton.textContent = 'X';
+                    removeButton.classList.add('remove-preview');
+                    removeButton.addEventListener('click', () => {
+                        previewItem.replaceWith(children1);
+                        children2.value = '';
+                    });
 
-                previewItem.appendChild(img);
-                previewItem.appendChild(removeButton);
-                children1.replaceWith(previewItem);
-            };
-            reader.readAsDataURL(file);
-        });
+                    previewItem.appendChild(img);
+                    previewItem.appendChild(removeButton);
+                    children1.replaceWith(previewItem);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        else 
+        {
+            alert("Please upload an image file only");
+        }
         
     }
-
-    // document.getElementsByClassName('btn-upload-img')[0].addEventListener('click', function(event) {
-        
-    // })
-
-    // document.getElementById('fileInput').addEventListener('change', function(event) {
-
-        // const files = event.target.files;
-        // const previewContainer = document.getElementById('container-upload');
-        // const deletedFilesInput = document.getElementById('deletedFiles');
-        // //const previewContainer = document.getElementById('div-container-upload');
-
-        // // Clear existing previews
-        // // document.getElementById('div-container-upload').classList.remove('btn-upload-img')
-        // previewContainer.innerHTML = '';
-
-        // Array.from(files).forEach((file, index) => {
-        //     const reader = new FileReader();
-        //     reader.onload = function(e) {
-        //         const previewItem = document.createElement('div');
-        //         previewItem.classList.add('preview-upload');
-
-        //         const img = document.createElement('img');
-        //         img.src = e.target.result;
-        //         img.alt = 'Image Preview';
-                
-        //         const removeButton = document.createElement('button');
-        //         removeButton.type = 'button';
-        //         removeButton.textContent = 'X';
-        //         removeButton.classList.add('remove-preview');
-        //         removeButton.addEventListener('click', () => {
-        //             deletedFilesInput.value += file.name + ',';
-        //             previewContainer.removeChild(previewItem);
-
-        //             if(document.getElementById('container-upload').children.length == 0) {
-        //                 // jika kosong
-        //                 document.getElementById('div-container-upload').style.display = 'block';
-        //             }
-        //         });
-
-        //         previewItem.appendChild(img);
-        //         previewItem.appendChild(removeButton);
-        //         previewContainer.appendChild(previewItem);
-        //     };
-        //     reader.readAsDataURL(file);
-        // });
-    // })
-
-    // window.addEventListener("click", function(event) {
-
-    //     if(event.target.classList.contains('remove-preview')) {
-    //         event.target.parentElement.remove()
-    //     }
-    // });
-
     
 </script>

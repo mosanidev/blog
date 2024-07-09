@@ -90,66 +90,110 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($module == "portfolio") {
 
             if($action == 'addUpdate') {
+                
+                $successUpload = false;
 
-                var_dump($_FILES['foto-1']['tmp_name']);
-
-                /*
                 $id = $_POST['id'] ?? "";
                 $judul = $_POST['judul'];
                 $deskripsi = $_POST['deskripsi'];
                 $link = $_POST['link'];
-                $deletedFiles = $_POST['deletedFiles'];
 
-                $deletedFiles = explode(',', trim($deletedFiles, ','));
-                $foto = null;
                 $num = 1;
 
-                if(isset($_FILES['foto'])) {
+                // check image format
+                $allowedImageType = array("png","jpg","jpeg");
 
-                    foreach ($_FILES['foto']['name'] as $index => $name) {
-                        if (in_array($name, $deletedFiles)) {
-                            continue;
-                        }
-    
-                        if ($_FILES['foto']['error'][$index] === UPLOAD_ERR_OK) {
-        
-                            $uploadDir = 'src/img/uploads/portfolio/';
-                            //$uploadFile = $uploadDir . basename($_FILES['foto']['name'][$index]);
-    
-                            $type = explode("/", $_FILES['foto']['type'][$index])[1];
-        
-                            $uploadFile = $uploadDir . $judul . "_" . $num . "." . $type;   
-                            
-                            $foto .= $uploadFile;
-    
-                            if (!move_uploaded_file($_FILES['foto']['tmp_name'][$index], $uploadFile)) {
-                                echo "<p>Error moving file to $uploadFile</p>";
-                                break;
-                            } 
+                $allAllowed = true;
+                foreach($_FILES as $data) { 
+                    $typeFoto = $data['type'] != "" ? explode("/", $data['type'])[1] : "";
 
-                            $foto .= ",";
-    
-                        } else {
-                            echo "<p>Error uploading file: " . $_FILES['fileInput']['error'][$index] . "</p>";
+                    if($typeFoto != "") {
+                        if(!in_array($typeFoto, $allowedImageType)) {
+                            echo "<p>Uploaded photo is not in right format</p>";
+                            $allAllowed = false;
                             break;
                         }
-    
-                        $num++;
                     }
                 }
 
-                $portfolioModel = new PortfolioModel();
+                $foto = "";
 
-                $portfolioController = new PortfolioController($portfolioModel);
+                if($allAllowed) 
+                {
+                    foreach($_FILES as $data) {
+                        $typeFoto = $data['type'] != "" ? explode("/", $data['type'])[1] : "";
+    
+                        if($typeFoto != "") {
+                            if($data['error'] === UPLOAD_ERR_OK) {
+    
+                                $uploadDir = 'src/img/uploads/portfolio/'.$judul.'/';
+        
+                                if(!is_dir($uploadDir)) {
+                                    mkdir($uploadDir);
+                                }
+
+                                $type = explode("/", $data['type'])[1];
+            
+                                $uploadFile = $uploadDir . $judul . "_" . $num . "." . $type;   
+
+                                if($foto != "") 
+                                    $foto .= "|";
+
+                                $foto .= $uploadFile;
+
+                                if (!move_uploaded_file($data['tmp_name'], $uploadFile)) {
+                                    echo "<p>Error moving file to $uploadFile</p>";
+                                    break;
+                                } 
+
+                                $successUpload = true;
+
+                                $num++;
+                            }
+                            else {
+                                $error_messages = array(
+                                    UPLOAD_ERR_OK         => 'There is no error, the file uploaded with success',
+                                    UPLOAD_ERR_INI_SIZE   => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+                                    UPLOAD_ERR_FORM_SIZE  => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+                                    UPLOAD_ERR_PARTIAL    => 'The uploaded file was only partially uploaded',
+                                    UPLOAD_ERR_NO_FILE    => 'No file was uploaded',
+                                    UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder',
+                                    UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                                    UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload',
+                                );
+        
+                                echo "<p>Error uploading file: " . $error_messages[$data['error']] . "</p>";
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                $imgUploaded = array_filter($_FILES, function($a) { return $a['name']; });
+
+                if($successUpload || count($imgUploaded) == 0) {
+                    $portfolioModel = new PortfolioModel();
+
+                    $portfolioController = new PortfolioController($portfolioModel);
                 
-                $_POST['user_id'] = $_SESSION['user_id'];
-                $_POST['foto'] = $foto;
+                    $_POST['user_id'] = $_SESSION['user_id'];
 
-                $portfolioModel->fill($_POST);
+                    // $foto = "";
+                    // if(count($imgUploaded) > 0) {
+                    //     foreach($imgUploaded as $data) {
+                    //         if($foto != "") 
+                    //             $foto .= "|";
+                    //         $foto .= $data['name']; 
+                    //     }
+                    // }
+                    // $_POST['foto'] = $foto;
 
-                $portfolioController->createUpdatePOST($portfolioModel);
+                    $_POST['foto'] = $foto;
 
-                */
+                    $portfolioModel->fill($_POST);
+
+                    $portfolioController->createUpdatePOST($portfolioModel);
+                }
             }
 
         }
