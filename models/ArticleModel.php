@@ -14,7 +14,6 @@ class ArticleModel {
     }
 
     public function fill($array) {
-        //$model = array();
 
         if(count($array) > 0) {
             $this->id = ($array["id"] != null || $array["id"] != "") ? $array["id"] : 0;
@@ -23,6 +22,7 @@ class ArticleModel {
             $this->isi = $array["isi"];
             $this->user_id = $array["user_id"];
         }
+        
     }
 
     public function getArticle() {

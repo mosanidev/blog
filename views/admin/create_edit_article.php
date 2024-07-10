@@ -15,7 +15,7 @@
 
 <br>
 
-<form method="POST" action="index.php?page=admin&module=article&action=addUpdate">
+<form method="POST" action="index.php?page=admin&module=article&action=addUpdate" onsubmit="showLoader(event, document.getElementById('btn-simpan-article'))">
 
     <input type="hidden" name="id" value="<?= $id ?>">
 
@@ -27,7 +27,7 @@
     
     <div class="form-input">
         <label>Akses</label>
-        <input type="radio" name="akses" value="Publik" <?php if($akses == "Publik") { echo "checked";} ?>>Publik
+        <input type="radio" name="akses" value="Publik" <?php if($akses == "Publik") { echo "checked";} else if($akses == "") { echo "checked"; } ?>>Publik
         <input type="radio" name="akses" value="Privat" <?php if($akses == "Privat") { echo "checked";} ?>>Privat
     </div>
 
@@ -38,7 +38,7 @@
         </textarea>
     </div>
 
-    <button type="submit" class="btn-action-admin" style="margin: 10px auto; width:100px;">Simpan</button>
+    <button type="submit" class="btn-action-admin" id="btn-simpan-article" style="margin: 10px auto; width:100px;">Simpan</button>
 </form>
 
 <script>

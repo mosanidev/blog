@@ -229,6 +229,6 @@ else  {
     
 }
 
-
+include_once 'views/global.php';
 
 ?>

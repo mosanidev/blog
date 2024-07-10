@@ -11,6 +11,7 @@
         <tr>    
             <th>No</th>
             <th>Judul</th>
+            <th>Akses</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
                     <tr>
                         <td width="40" style="text-align: center;"><?= $num; ?></td>
                         <td><?= $article[$i]['judul']; ?></td>
+                        <td width="70"><?= $article[$i]['akses']; ?></td>
                         <td width="150" style="text-align: center;"><a class="btn-action-admin" href="index.php?page=admin&module=create_edit_article&id=<?= $article[$i]["id"] ?>">Ubah</a> <a class="btn-action-admin" type="button" onclick="hapus(<?php echo $article[$i]['id']; ?>)">Hapus</a></td>
                     </tr>
                 <?php

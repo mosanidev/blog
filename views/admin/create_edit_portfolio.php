@@ -4,7 +4,6 @@
     $judul = $article['judul'] ?? "";
     $deskripsi = $article['deskripsi'] ?? "";
     $link = $article['link'] ?? ""; 
-
 ?>
 
 <a href="index.php?page=admin&module=portfolio"><- Kembali</a>
@@ -15,18 +14,18 @@
 
 <br>
 
-<form method="POST" class="form-data" action="index.php?page=admin&module=portfolio&action=addUpdate" enctype="multipart/form-data">
+<form class="form-data" method="POST" action="index.php?page=admin&module=portfolio&action=addUpdate" enctype="multipart/form-data" onsubmit="return showLoader(event, document.getElementById('btn-simpan-portfolio'));">
 
-    <input type="hidden" name="id" value="<?= $id ?>">
+    <input type="hidden" name="id" value="<?php if($portfolio != null) { echo $portfolio['id']; } ?>">
 
     <div class="form-input">
         <label>Judul :</label>
-        <input type="text" name="judul" value="<?= $judul ?>" required>
+        <input type="text" name="judul" value="<?php if($portfolio != null) { echo $portfolio['judul']; } ?>" required>
     </div>
 
     <div class="form-input">
         <label>Deskripsi :</label><br>
-        <textarea name="deskripsi" rows="6"></textarea>
+        <textarea name="deskripsi" rows="6"><?php if($portfolio != null) { echo $portfolio['deskripsi']; } ?></textarea>
     </div>
 
     <div class="form-input">
@@ -47,10 +46,10 @@
 
     <div class="form-input">
         <label>Link :</label>
-        <input type="text" name="link" value="<?= $link ?>">
+        <input type="text" name="link" value="<?php if($portfolio != null) { echo $portfolio['link']; } ?>">
     </div>
 
-    <button type="submit" class="btn-action-admin" style="margin: 10px auto; width:100px;">Simpan</button>
+    <button type="submit" class="btn-action-admin" id="btn-simpan-portfolio" style="margin: 10px auto; width:100px;">Simpan</button>
 </form>
 
 <script>
@@ -62,6 +61,42 @@
         document.querySelector('input[name=' + clickedElement.classList[1] +']').click();
 
     }
+
+    function loadImage() {
+        const idPortfolio = document.querySelector('input[name=id]').value;
+
+        if(idPortfolio != '') 
+        {
+            const foto = "<?php echo $portfolio['foto']; ?>";
+            const foto1 = foto.split("|")[0];
+            const foto2 = foto.split("|")[1];
+            const foto3 = foto.split("|")[2];
+
+            /*
+            const previewItem = document.createElement('div');
+            previewItem.classList.add('preview-upload');
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = 'Image Preview';
+            
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.textContent = 'X';
+            removeButton.classList.add('remove-preview');
+            removeButton.addEventListener('click', () => {
+                previewItem.replaceWith(children1);
+                children2.value = '';
+            });
+
+            previewItem.appendChild(img);
+            previewItem.appendChild(removeButton);
+            children1.replaceWith(previewItem);
+            */
+        }
+    }
+
+    loadImage();
 
     function fileUpload() {
 
