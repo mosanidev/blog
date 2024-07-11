@@ -213,7 +213,6 @@ else  {
         else {
             include_once("views/front/front.php");
         }
-
         
         if($action == 'logout') {
             $authController->logout();

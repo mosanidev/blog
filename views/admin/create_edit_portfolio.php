@@ -10,7 +10,7 @@
 
 <br>
 
-<h1>Create New Portfolio</h1>
+<h1>Create / Edit Portfolio</h1>
 
 <br>
 
@@ -30,15 +30,15 @@
 
     <div class="form-input">
         <label>Foto :</label><br>
-        <div id="file-upload-1" style="display: inline;">
+        <div id="file-upload-1" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-1" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
             <input type="file" name="foto-1" onchange="fileUpload();" id="fileInput-1" style="display: none;" accept="image/png, image/gif, image/jpeg">
         </div>
-        <div id="file-upload-2" style="display: inline;">
+        <div id="file-upload-2" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-2" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
             <input type="file" name="foto-2" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
         </div>
-        <div id="file-upload-3" style="display: inline;">
+        <div id="file-upload-3" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-3" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
             <input type="file" name="foto-3" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
         </div> 
@@ -61,42 +61,6 @@
         document.querySelector('input[name=' + clickedElement.classList[1] +']').click();
 
     }
-
-    function loadImage() {
-        const idPortfolio = document.querySelector('input[name=id]').value;
-
-        if(idPortfolio != '') 
-        {
-            const foto = "<?php echo $portfolio['foto']; ?>";
-            const foto1 = foto.split("|")[0];
-            const foto2 = foto.split("|")[1];
-            const foto3 = foto.split("|")[2];
-
-            /*
-            const previewItem = document.createElement('div');
-            previewItem.classList.add('preview-upload');
-
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.alt = 'Image Preview';
-            
-            const removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.textContent = 'X';
-            removeButton.classList.add('remove-preview');
-            removeButton.addEventListener('click', () => {
-                previewItem.replaceWith(children1);
-                children2.value = '';
-            });
-
-            previewItem.appendChild(img);
-            previewItem.appendChild(removeButton);
-            children1.replaceWith(previewItem);
-            */
-        }
-    }
-
-    loadImage();
 
     function fileUpload() {
 
@@ -143,3 +107,57 @@
     }
     
 </script>
+
+<?php
+
+if($portfolio != null) {
+
+    $functionString = <<<FUNC
+        function loadImage() {
+
+        const idPortfolio = document.querySelector('input[name=id]').value;
+
+        if(idPortfolio != "") 
+        {
+            const foto = '$portfolio[foto]';
+
+            if(foto != "") {
+
+                const previewContainer = document.getElementsByClassName('preview_upload_pic');
+
+                for(let i=0; i < document.getElementsByClassName('preview_upload_pic').length; i++) {
+                    const previewContainerItem = document.getElementsByClassName('preview_upload_pic')[i];
+
+                    const children1 = previewContainerItem.children[0];
+                    const children2 = previewContainerItem.children[1];
+
+                    const previewItem = document.createElement('div');
+                    previewItem.classList.add('preview-upload');
+
+                    const img = document.createElement('img');
+                    img.src = foto.split("|")[i];
+                    img.alt = 'Image Preview';
+
+                    const removeButton = document.createElement('button');
+                    removeButton.type = 'button';
+                    removeButton.textContent = 'X';
+                    removeButton.classList.add('remove-preview');
+                    removeButton.addEventListener('click', () => {
+                        previewItem.replaceWith(children1);
+                        children2.value = '';
+                        console.log(i+1);
+                    });
+
+                    previewItem.appendChild(img);
+                    previewItem.appendChild(removeButton);
+                    children1.replaceWith(previewItem);
+                }
+            }
+        }
+    }
+    loadImage()
+    FUNC;
+
+    echo "<script>$functionString</script>";
+}
+?>

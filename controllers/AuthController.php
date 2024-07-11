@@ -25,13 +25,13 @@ class AuthController {
 
             } 
             else {
-                $error = "Invalid username or password";
+                $error = "Wrong username or password";
                 include 'views/login/login.php';
             }
 
         }
         else {
-            $error = "Invalid username or password";
+            $error = "Wrong username or password";
             include 'views/login/login.php';
         }
     }

@@ -23,8 +23,6 @@ class PortfolioController {
             $portfolio = $this->getById($id);
         }
 
-        var_dump($portfolio);
-
         include_once 'views/admin/create_edit_portfolio.php';
     }
 
@@ -52,7 +50,7 @@ class PortfolioController {
             $stmt->execute();
         }
         else {
-            
+            var_dump($foto);
         }
 
         if($stmt->affected_rows > 0) {

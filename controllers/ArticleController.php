@@ -65,8 +65,9 @@ class ArticleController {
             $stmt->execute();
         }
 
-        if($stmt->affected_rows > 0) {
+        if($stmt->affected_rows >= 0) {
             header("Location: index.php?page=admin&module=article");
+            exit;
         }
     }
 }
