@@ -121,11 +121,13 @@ if($portfolio != null) {
         {
             const foto = '$portfolio[foto]';
 
+            const fotoArr = foto.split('|');
+
             if(foto != "") {
 
                 const previewContainer = document.getElementsByClassName('preview_upload_pic');
 
-                for(let i=0; i < document.getElementsByClassName('preview_upload_pic').length; i++) {
+                for(let i=0; i < fotoArr.length; i++) {
                     const previewContainerItem = document.getElementsByClassName('preview_upload_pic')[i];
 
                     const children1 = previewContainerItem.children[0];
@@ -135,7 +137,7 @@ if($portfolio != null) {
                     previewItem.classList.add('preview-upload');
 
                     const img = document.createElement('img');
-                    img.src = foto.split("|")[i];
+                    img.src = fotoArr[i];
                     img.alt = 'Image Preview';
 
                     const removeButton = document.createElement('button');

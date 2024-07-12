@@ -178,22 +178,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                     $_POST['user_id'] = $_SESSION['user_id'];
 
-                    // $foto = "";
-                    // if(count($imgUploaded) > 0) {
-                    //     foreach($imgUploaded as $data) {
-                    //         if($foto != "") 
-                    //             $foto .= "|";
-                    //         $foto .= $data['name']; 
-                    //     }
-                    // }
-                    // $_POST['foto'] = $foto;
-
                     $_POST['foto'] = $foto;
 
                     $portfolioModel->fill($_POST);
 
                     $portfolioController->createUpdatePOST($portfolioModel);
                 }
+            }
+
+            if($action == 'delete') {
+                $id = $_POST['id'];
+
+                $portfolioModel = new PortfolioModel();
+                $portfolioController = new PortfolioController($portfolioModel);
+                $portfolioController->delete($id);
             }
 
         }

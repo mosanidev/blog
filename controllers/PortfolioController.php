@@ -59,6 +59,17 @@ class PortfolioController {
         }
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM portfolio WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        if($stmt->affected_rows > 0) {
+            header("Location: index.php?page=admin&module=portfolio");
+        }
+    }
+
 }
 
 ?>

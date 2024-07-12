@@ -47,6 +47,26 @@
     </tbody>
 </table>
 
+<div id="deletePortfolio" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+        <h2>Warning</h2>
+        <span class="close">×</span>
+    </div>
+    <p class="text-warning-delete">Are you sure to delete this ? </p>
+    <div class="container-btn-warning-delete">
+        <form method="POST" action="index.php?page=admin&module=portfolio&action=delete">
+            <input type="hidden" id="deleted_id" name="id">
+            <input type='submit' class="btn-yes-delete" id="btn-hapus-portfolio" value="Yes">
+            <button type="button" class="btn-no-delete">No</button>
+        </form>
+    </div>  
+  </div>
+
+</div>
+
 <script>
     
     function shortenLongText(content, numOfWord) {
@@ -62,6 +82,21 @@
 
         let deskripsiPortfolioContent = deskripsiPortfolio[i].innerText;
         deskripsiPortfolio[i].innerText = shortenLongText(deskripsiPortfolioContent, 10) + '....';
+    }
+
+    document.querySelector("#deletePortfolio .close").onclick = function() {
+        document.getElementById("deletePortfolio").style.display = "none";
+    }
+
+    document.querySelector("#deletePortfolio .btn-no-delete").onclick = function() {
+        document.getElementById("deletePortfolio").style.display = "none";
+    }
+
+    function hapus(id) {
+        
+        document.getElementById("deletePortfolio").style.display = "block";
+
+        document.querySelector("#deletePortfolio #deleted_id").value = id;
     }
 
 </script>
