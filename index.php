@@ -188,10 +188,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if($action == 'delete') {
                 $id = $_POST['id'];
+                $judul = $_POST['judul'];
 
                 $portfolioModel = new PortfolioModel();
                 $portfolioController = new PortfolioController($portfolioModel);
-                $portfolioController->delete($id);
+                $portfolioController->delete($id, $judul);
             }
 
         }

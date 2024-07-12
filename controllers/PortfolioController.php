@@ -59,15 +59,23 @@ class PortfolioController {
         }
     }
 
-    public function delete($id)
+    public function delete($id, $judul)
     {
+        
         $stmt = $this->db->prepare("DELETE FROM portfolio WHERE id=?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
 
         if($stmt->affected_rows > 0) {
+            
+            // if(is_dir('src/img/uploads/portfolio/'.$judul)) {
+            //     var_dump(rmdir('src/img/uploads/portfolio/'.$judul));
+            // }
+
             header("Location: index.php?page=admin&module=portfolio");
+            exit;
         }
+        
     }
 
 }

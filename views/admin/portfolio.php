@@ -28,7 +28,7 @@
                         <td width="40" style="text-align: center;"><?= $num; ?></td>
                         <td><?= $portfolio[$i]['judul'] ?></td>
                         <td class="deskripsiPortfolio"><?= $portfolio[$i]['deskripsi'] ?></td>
-                        <td width="150" style="text-align: center;"><a class="btn-action-admin" href="index.php?page=admin&module=create_edit_portfolio&id=<?= $portfolio[$i]["id"] ?>">Ubah</a> <a class="btn-action-admin" type="button" onclick="hapus(<?php echo $portfolio[$i]['id']; ?>)">Hapus</a></td>
+                        <td width="150" style="text-align: center;"><a class="btn-action-admin" href="index.php?page=admin&module=create_edit_portfolio&id=<?= $portfolio[$i]["id"] ?>">Ubah</a> <a class="btn-action-admin" type="button" onclick="hapus(<?= $portfolio[$i]['id']; ?>, '<?= $portfolio[$i]['judul']; ?>')">Hapus</a></td>
                     </tr>
                 <?php
                     $num++;
@@ -59,6 +59,7 @@
     <div class="container-btn-warning-delete">
         <form method="POST" action="index.php?page=admin&module=portfolio&action=delete">
             <input type="hidden" id="deleted_id" name="id">
+            <input type="hidden" id="deleted_judul" name="judul">
             <input type='submit' class="btn-yes-delete" id="btn-hapus-portfolio" value="Yes">
             <button type="button" class="btn-no-delete">No</button>
         </form>
@@ -92,11 +93,13 @@
         document.getElementById("deletePortfolio").style.display = "none";
     }
 
-    function hapus(id) {
+    function hapus(id, judul) {
         
         document.getElementById("deletePortfolio").style.display = "block";
 
         document.querySelector("#deletePortfolio #deleted_id").value = id;
+        
+        document.querySelector("#deletePortfolio #deleted_judul").value = judul;
     }
 
 </script>

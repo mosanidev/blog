@@ -10,8 +10,8 @@
     <div class="bg-login">
         <form class="form-login" method="POST" autocomplete="off">
             <h3 style="text-align: center; letter-spacing: 4px;">LOGIN</h3>
-                <input type="text" class="input-login" name="username" placeholder="Username">
-                <input type="password" class="input-login" name="password" placeholder="Password">
+                <input type="text" class="input-login" name="username" placeholder="Username" required>
+                <input type="password" class="input-login" name="password" placeholder="Password" required>
             <input type="submit" class="btn-login" value="Login">
         </form>
         <?php 
