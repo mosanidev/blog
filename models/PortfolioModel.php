@@ -23,6 +23,7 @@ class PortfolioModel {
             $this->foto = $array["foto"];
             $this->link = $array["link"];
             $this->user_id = $array["user_id"];
+            $this->deleted_photo = $array["deleted_photo"] ?? "";
         }
 
     }

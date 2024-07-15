@@ -42,21 +42,31 @@ class PortfolioController {
         $foto = $model->foto;
         $link = $model->link;
         $user_id = $model->user_id;
+        $deleted_photo = $model->deleted_photo;
 
         if($id == 0)
         {
             $stmt = $this->db->prepare("INSERT INTO portfolio (judul, deskripsi, foto, link, user_id) VALUES (?,?,?,?,?)");
-            $stmt->bind_param("sssss", $judul, $deskripsi, $foto, $link, $user_id);
+            $stmt->bind_param("ssssi", $judul, $deskripsi, $foto, $link, $user_id);
             $stmt->execute();
         }
         else {
-            var_dump($foto);
+
+            if($deleted_photo != "EMPTY_ALL") {
+
+                
+
+            }
+
+            // $stmt = $this->db->prepare("UPDATE portfolio SET judul = ?, deskripsi = ?, foto = ?, link = ?, user_id = ? WHERE id = ?");
+            // $stmt->bind_param("ssssii", $judul, $deskripsi, $foto, $link, $user_id, $id);
+            // $stmt->execute();
         }
 
-        if($stmt->affected_rows > 0) {
-            header("Location: index.php?page=admin&module=portfolio");
-            exit();
-        }
+        // if($stmt->affected_rows > 0) {
+        //     header("Location: index.php?page=admin&module=portfolio");
+        //     exit();
+        // }
     }
 
     public function delete($id, $judul)

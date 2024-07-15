@@ -32,17 +32,34 @@
         <label>Foto :</label><br>
         <div id="file-upload-1" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-1" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
-            <input type="file" name="foto-1" onchange="fileUpload();" id="fileInput-1" style="display: none;" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto-1" data-index="1" onchange="fileUpload(event);" style="display: none;" accept="image/png, image/gif, image/jpeg">
         </div>
         <div id="file-upload-2" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-2" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
-            <input type="file" name="foto-2" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto-2" data-index="2" onchange="fileUpload(event);" style="display:none;" accept="image/png, image/gif, image/jpeg">
         </div>
         <div id="file-upload-3" class="preview_upload_pic" style="display: inline;">
             <div class="btn-upload-img foto-3" id="div-container-upload" onclick="clickUpload(event)">+ Upload</div>
-            <input type="file" name="foto-3" onchange="fileUpload();" style="display:none;" id="fileInput" accept="image/png, image/gif, image/jpeg">
+            <input type="file" name="foto-3" data-index="3" onchange="fileUpload(event);" style="display:none;" accept="image/png, image/gif, image/jpeg">
         </div> 
     </div>
+
+    <?php
+
+        if($portfolio != null)
+        {
+            if($portfolio['id'] != null) {
+                ?>
+
+                <input type="text" name="deleted_photo">
+                <input type="text" name="changed_photo">
+
+                <?php
+            }
+        }
+
+
+    ?>
 
     <div class="form-input">
         <label>Link :</label>
@@ -62,13 +79,17 @@
 
     }
 
-    function fileUpload() {
+    function fileUpload(event) {
 
+        let dataIndex = event.target.getAttribute('data-index');
         const files = event.target.files;
         const previewContainer = event.target.parentElement;    
 
         const children1 = previewContainer.children[0];
         const children2 = previewContainer.children[1];
+
+        const changedFotoContainer = document.querySelector('input[name=changed_photo]');
+        const judul = document.querySelector('input[name=judul]').value;
 
         const isItImage = files[0].type.includes('image');
 
@@ -82,6 +103,14 @@
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.alt = 'Image Preview';
+
+                    if(changedFotoContainer != null) {
+
+                        if(changedFotoContainer.value != "") 
+                            changedFotoContainer.value += '|';
+
+                        changedFotoContainer.value += (dataIndex-1);
+                    }  
                     
                     const removeButton = document.createElement('button');
                     removeButton.type = 'button';
@@ -105,6 +134,28 @@
         }
         
     }
+
+    // function removePhotoInEditMode() {
+
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         const removeBtn = document.getElementsByClassName('remove-preview');
+    //         const idPortfolio = document.querySelector('input[name=id]').value;
+
+    //         if(idPortfolio != "") 
+    //         {
+    //             for (let i = 0 ; i < removeBtn.length; i++) {
+    //                 removeBtn[i].addEventListener('click' , () => {
+    //                     const imgSrc = document.getElementsByClassName('preview_upload_pic')[i];
+
+    //                     console.log(imgSrc);
+    //                 });
+    //             }
+    //         }
+    //     });
+
+    // }
+
+    // removePhotoInEditMode();
     
 </script>
 
@@ -116,6 +167,7 @@ if($portfolio != null) {
         function loadImage() {
 
         const idPortfolio = document.querySelector('input[name=id]').value;
+        const deletedFotoContainer = document.querySelector('input[name=deleted_photo]');
 
         if(idPortfolio != "") 
         {
@@ -145,9 +197,14 @@ if($portfolio != null) {
                     removeButton.textContent = 'X';
                     removeButton.classList.add('remove-preview');
                     removeButton.addEventListener('click', () => {
+                    
+                        if(deletedFotoContainer.value != "")
+                            deletedFotoContainer.value += '|';
+
+                        deletedFotoContainer.value += fotoArr[i];
+
                         previewItem.replaceWith(children1);
                         children2.value = '';
-                        console.log(i+1);
                     });
 
                     previewItem.appendChild(img);

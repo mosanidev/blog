@@ -97,6 +97,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $judul = $_POST['judul'];
                 $deskripsi = $_POST['deskripsi'];
                 $link = $_POST['link'];
+                $deletedPhoto = $_POST['deleted_photo'] ?? "";
+                $changedPhoto = $_POST['changed_photo'] ?? "";
 
                 $num = 1;
 
@@ -120,9 +122,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if($allAllowed) 
                 {
+                    $imgChanged = array_filter($_FILES, function($a) { if($a['size'] > 0 ) return $a; });
+
+                    if(count($imgChanged) > 0) {
+
+                    }
+                    
                     foreach($_FILES as $data) {
                         $typeFoto = $data['type'] != "" ? explode("/", $data['type'])[1] : "";
-    
+
                         if($typeFoto != "") {
                             if($data['error'] === UPLOAD_ERR_OK) {
     
@@ -166,12 +174,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 break;
                             }
                         }
+                        
                     }
+                }
+
+
+                if($deletedPhoto != "") {
+
+                    $deletedPhotoArr = explode("|", $deletedPhoto);
+
+                    foreach($deletedPhotoArr as $item) {
+                        unlink($item);
+                    }
+
+                    if(count(glob("src/img/uploads/portfolio/".$judul."/" . "/*")) == 0)  {
+                        rmdir('src/img/uploads/portfolio/'.$judul.'/');
+                        $_POST['deleted_photo'] = "EMPTY_ALL";
+                    }
+                    
                 }
 
                 $imgUploaded = array_filter($_FILES, function($a) { return $a['name']; });
 
                 if($successUpload || count($imgUploaded) == 0) {
+                    
                     $portfolioModel = new PortfolioModel();
 
                     $portfolioController = new PortfolioController($portfolioModel);
@@ -183,6 +209,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $portfolioModel->fill($_POST);
 
                     $portfolioController->createUpdatePOST($portfolioModel);
+                    
                 }
             }
 
